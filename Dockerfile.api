@@ -1,0 +1,14 @@
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Copie des dépendances
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir flask flask-cors
+
+# Copie du code source
+COPY src/ ./src/
+
+# L'API écoute sur 0.0.0.0 pour être accessible depuis l'extérieur du conteneur
+CMD ["python", "src/api.py"]

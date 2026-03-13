@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py --version)",
+      "Bash(mongod --version)",
+      "Bash(py -m pip install pymongo==4.7.2)",
+      "Bash(py -c \"from pymongo import MongoClient; c = MongoClient\\(''mongodb://localhost:27017'', serverSelectionTimeoutMS=3000\\); print\\(c.admin.command\\(''ping''\\)\\)\")",
+      "Bash(py -c \"from pymongo import MongoClient; c = MongoClient\\(''mongodb://localhost:27017''\\); col = c[''guardianpy''][''audits'']; print\\(f''{col.count_documents\\({}\\)} document\\(s\\) dans la collection audits''\\)\")",
+      "Bash(py -m pip install bandit pip-audit)",
+      "Bash(py -m bandit -r src/)",
+      "Bash(py -m pip_audit)",
+      "Bash(py -m pip install flask flask-cors)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(netstat -ano)",
+      "Bash(cmd /c \"taskkill /PID 15172 /F & taskkill /PID 8104 /F\")",
+      "Bash(cmd /c \"taskkill /PID 15172 /F\")",
+      "Bash(cmd /c \"taskkill /PID 15172 /F 2>&1 & taskkill /PID 8104 /F 2>&1\")",
+      "Bash(cmd /c taskkill /PID 15172 /F)",
+      "Bash(cmd /c taskkill /PID 8104 /F)",
+      "Bash(docker exec:*)"
+    ]
+  }
+}

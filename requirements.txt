@@ -1,0 +1,8 @@
+# Phase 1 — modules natifs uniquement, pas de dépendances externes
+
+# Phase 2
+pymongo==4.7.2
+
+# Phase 4 — outils de sécurité
+bandit==1.9.4
+pip-audit==2.10.0

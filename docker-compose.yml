@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+
+  # ── MongoDB ─────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: guardianpy_mongo
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: guardianpy
+
+  # ── API Flask ────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: guardianpy_api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB: guardianpy
+      LOG_LEVEL: INFO
+    depends_on:
+      - mongo
+
+  # ── Dashboard Next.js ────────────────────────────────────
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile.dashboard
+    container_name: guardianpy_dashboard
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:
